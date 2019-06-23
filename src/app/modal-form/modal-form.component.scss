@@ -1,0 +1,16 @@
+input.simple-number::-webkit-outer-spin-button,
+input.simple-number::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.simple-number {
+  -moz-appearance: textfield;
+}
+
+.picture-side {
+  margin-bottom: 20px;
+}
+
+.picture {
+  margin-right: 200px;
+}

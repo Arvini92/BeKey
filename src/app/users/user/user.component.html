@@ -1,0 +1,12 @@
+<mat-card>
+    <a [routerLink]="['/user', index]">
+      <img mat-card-image [src]="user.picture" alt="Picture of a {{user.name}}">
+    </a>
+    <mat-card-header>
+      <mat-card-title>{{user.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button (click)="onEdit()">Edit</button>
+      <button mat-button (click)="onDelete()">Delete</button>
+    </mat-card-actions>
+</mat-card>

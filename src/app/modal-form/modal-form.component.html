@@ -1,0 +1,95 @@
+<h1 mat-dialog-title>Please enter you data.</h1>
+<div mat-dialog-content>
+    <form (ngSubmit)="onSave()" class="container" [formGroup]="userForm">
+      <div class="row">
+        <div class="col">
+          <div class="col picture-side">
+            <img [src]="user.picture" class="picture" id="picture"  mat-card-md-image alt="Your photo">
+            <button class="" type="button" mat-raised-button color="primary" (click)="imgFileInput.click()">{{!imgFileInput.value && !user.picture ? 'Add a photo' : 'Change photo'}}</button>
+            <input hidden name="picture" type="file" #imgFileInput formControlName="picture" (change)="onSelectFile($event)"/>
+          </div>
+          
+          <mat-form-field  class="col">
+            <input matInput placeholder="Name" name="name" formControlName="name">
+            <mat-error *ngIf="checkFieldState('name')">
+              Please enter your name
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field  class="col">
+            <input matInput placeholder="Email" type="email" name="email" email formControlName="email">
+            <mat-error *ngIf="checkFieldState('email')">
+              Please enter a valid email address
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col">
+            <input matInput placeholder="Balance" 
+            name="balance"
+            class="simple-number" formControlName="balance">
+            <mat-error *ngIf="checkFieldState('balance')">
+              Please enter a valid balance
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field  class="col">
+            <input matInput 
+              placeholder="Age" type="number" 
+              name="age"
+              class="simple-number" formControlName="age">
+            <mat-error *ngIf="checkFieldState('age')">
+              Sorry you must be over 14 years old
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+      
+        <div class="col">
+          <mat-form-field class="col">
+            <input matInput placeholder="Phone" type="tel" name="phone" formControlName="phone">
+            <mat-error *ngIf="checkFieldState('phone')">
+              Please enter a valid phone
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field class="col">
+            <input matInput placeholder="Address" name="address" formControlName="address">
+            <mat-error *ngIf="checkFieldState('address')">
+              Please enter a valid address
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col">
+            <mat-chip-list #chipList aria-label="Tags">
+              <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                        [removable]="removable" (removed)="removeTag(tag)"
+                        color="primary" selected>
+                {{tag}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Tags"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="addTag($event)"
+                    name="tags" formControlName="tags">
+            </mat-chip-list>
+          </mat-form-field>
+            
+
+          <mat-form-field class="col">
+            <textarea  matInput placeholder="About" name="about" #about formControlName="about"
+            maxlength="maxLengthAboutField"></textarea>
+            <mat-hint align="end">{{about.value.length}} / {{maxLengthAboutField}}</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      
+
+      <div class="row">
+        <button mat-button type="button" (click)="onClose()">Close</button>
+        <button mat-button type="submit" [disabled]="!userForm.valid">Save</button>
+      </div>
+
+    </form>
+</div>

@@ -1,0 +1,8 @@
+<button mat-raised-button (click)="openDialog()" color="primary" class="col">Add User</button>
+<div class="row grid">
+    <app-user *ngFor="let user of users; let i = index" 
+        [user]="user" [index]="i" class="col-4"
+        (userDeleted)="onUserDeleted($event)"
+        (userEdited)="onUserEdited($event)">
+    </app-user>
+</div>
